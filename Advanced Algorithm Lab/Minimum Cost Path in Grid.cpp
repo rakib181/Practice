@@ -5,11 +5,11 @@ void min_cost_path(vector<vector<int>> &grid, int n, int m){
     vector<vector<int>> dp(n + 1, vector<int> (m + 1, 0));
     vector<vector<pair<int, int>>> path(n + 1, vector<pair<int, int>> (m + 1));
     dp[0][0] = grid[0][0]; path[0][0] = {0, 0};
-    for(int i = 1; i < n; i++){
+    for(int i = 1; i < m; i++){
         dp[0][i] += dp[0][i - 1] + grid[0][i];
         path[0][i] = {0, i - 1};
     }
-    for(int i = 1; i < m; i++){
+    for(int i = 1; i < n; i++){
         dp[i][0] +=  dp[i - 1][0] + grid[i][0];
         path[i][0] = {i - 1, 0};
     }
@@ -28,10 +28,10 @@ void min_cost_path(vector<vector<int>> &grid, int n, int m){
     int ii = n - 1, jj = m - 1;
     while (true){
         if (ii == 0 and jj == 0)break;
-         st.push({ii, jj});
-         int i = path[ii][jj].first;
-         int j = path[ii][jj].second;
-         ii = i; jj = j;
+        st.push({ii, jj});
+        int i = path[ii][jj].first;
+        int j = path[ii][jj].second;
+        ii = i; jj = j;
     }
     st.push({ii, jj});
     cout << "Minimum cost : " << dp[n - 1][m - 1] << '\n' << "Path -> ";
